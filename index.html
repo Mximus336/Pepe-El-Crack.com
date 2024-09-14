@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why so serious?</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background-image: url('gato.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow: hidden; /* Evitar scroll durante la animación */
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+            position: relative; /* Necesario para posicionar el mensaje de confirmación */
+        }
+        .form-container, .message-container {
+            background-color: #000;
+            border: 2px solid #d4af37; /* Color dorado */
+            border-radius: 10px;
+            padding: 30px;
+            width: 320px; /* Ancho fijo */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            text-align: center; /* Centrar texto */
+            opacity: 1; /* Opacidad inicial */
+            transform: translateY(0); /* Posición inicial */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Transiciones suaves */
+        }
+        .form-container {
+            z-index: 1; /* Asegura que el formulario esté encima del mensaje */
+        }
+        .form-container.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        .message-container {
+            display: none; /* Ocultar por defecto */
+            color: #fff;
+            position: absolute; /* Posicionamiento absoluto para superponer el mensaje */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centrar el mensaje */
+            z-index: 2; /* Asegura que el mensaje esté encima del formulario */
+            opacity: 0; /* Opacidad inicial */
+            transition: opacity 0.5s ease; /* Transición suave para el mensaje */
+        }
+        .message-container.show {
+            display: block;
+            opacity: 1;
+        }
+        .form-container h1, .message-container h1 {
+            color: #d4af37; /* Color dorado */
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .form-container label {
+            color: #fff;
+            display: block;
+            margin: 15px 0 5px;
+            text-align: left; /* Alinear etiquetas a la izquierda */
+        }
+        .form-container input {
+            width: calc(100% - 20px); /* Ajustar el ancho para incluir el padding */
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #d4af37;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            box-sizing: border-box; /* Incluir padding y borde en el ancho total */
+        }
+        .form-container input[type="submit"] {
+            background-color: #d4af37;
+            border: none;
+            color: #000;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #b8972f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="form-container" class="form-container">
+            <h1>Why so serious?</h1>
+            <form id="myForm">
+                <label for="first-name">Nombre:</label>
+                <input type="text" id="first-name" name="first-name" required>
+                
+                <label for="last-name">Apellidos:</label>
+                <input type="text" id="last-name" name="last-name" required>
+                
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+        <div id="message-container" class="message-container">
+            <h1>¡¡Felicidades Usted ha sido localizado y será encontrado 😈👹😈!!</h1>
+        </div>
+    </div>
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita el envío real del formulario
+            document.getElementById('form-container').classList.add('hidden'); // Agrega clase para ocultar el formulario
+            setTimeout(function() { // Espera un poco antes de mostrar el mensaje
+                document.getElementById('message-container').classList.add('show'); // Muestra el mensaje
+            }, 500); // Transición de medio segundo
+        });
+    </script>
+</body>
+</html>
